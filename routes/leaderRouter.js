@@ -1,21 +1,22 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const dishRouter = express.Router();
+const leaderRouter = express.Router();
 
-dishRouter.use(bodyParser.json());
+leaderRouter.use(bodyParser.json());
 
-dishRouter.route('/')
+leaderRouter.route('/')
+
 .all((req,res,next) =>{
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     next();
 })
 .get((req,res,next) => {
-    res.end('will send all the dishes to you');
+    res.end('will send all the leaders to you');
 })
 .post((req,res,next) => {
-    res.end('will add the dish: ' + req.body.name +
+    res.end('will add the leader: ' + req.body.name +
     'with details: ' + req.body.description);
 })
 .put((req,res,next) => {
@@ -23,31 +24,34 @@ dishRouter.route('/')
     res.end('PUT operation not supported on /dishes');
 })
 .delete((req,res,next) => {
-    res.end('Dleting all the dishes');
+    res.end('Dleting all the leaders');
 });
 
-dishRouter.route('/:dishId')
+leaderRouter.route('/:leaderId')
 .all((req,res,next) =>{
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     next();
 })
 .get((req,res,next) => {
-    res.end('Will send details of the dish: ' + req.params.dishId +' to you!');
+    res.end('Will send details of the leader: ' + req.params.leaderId +' to you!');
 })
 
 .post((req, res, next) => {
   res.statusCode = 403;
-  res.end('POST operation not supported on /dishes/'+ req.params.dishId);
+  res.end('POST operation not supported on /leaders/'+ req.params.leaderId);
 })
 
 .put((req, res, next) => {
-  res.write('Updating the dish: ' + req.params.dishId + '\n');
-  res.end('Will update the dish: ' + req.body.name + 
+  res.write('Updating the leader: ' + req.params.leaderId + '\n');
+  res.end('Will update the leader: ' + req.body.name + 
         ' with details: ' + req.body.description);
 })
 .delete((req,res,next) => {
-    res.end('Will delete details of the dish: ' + req.params.dishId );
+    res.end('Will delete details of the leader: ' + req.params.leaderId );
 });
 
-module.exports = dishRouter;
+
+
+
+module.exports = leaderRouter;
